@@ -33,7 +33,7 @@ $callback = function($msg) {
 			mysqli_query($conn, $sql);
 
 			// run scan and store results
-			print date('r') . ": running sudo " . $row['scanoptions'] . "\n";
+			printf("%s - %s: running sudo %s\n", date('r'), $row['scanid'], $row['scanoptions']);
 			$fp=popen('sudo ' . $row['scanoptions'], 'r');
 			while(!feof($fp)) {
 				$buffer = fgets($fp, 4096);
@@ -63,7 +63,7 @@ $callback = function($msg) {
 			$sql = sprintf("UPDATE `scans` SET `finished`=NOW() WHERE `id`=%d", $id);
 			mysqli_query($conn, $sql);
 			$msg->delivery_info['channel']->basic_ack($msg->delivery_info['delivery_tag']);
-			print date('r') . ": finished " . $row['scanoptions'] . "\n";
+			printf("%s - %s: finished\n", date('r'), $row['scanid']);
 		}
 	}
 	mysqli_close($conn);

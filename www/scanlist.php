@@ -9,7 +9,7 @@ if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT scanid,target,scanoptions,submitted,started,finished from `scans`";
+$sql = "SELECT scanid,target,scanoptions,submitted,started,finished FROM `scans` ORDER BY submitted DESC";
 
 $result = mysqli_query($conn, $sql);
 
