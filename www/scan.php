@@ -27,10 +27,12 @@ if($count > 0) {
 			$output .= sprintf("<h3>Finished</h3><p>%s</p>\n", $results['finished']);
 			$output .= sprintf("<h3>Results</h3><pre>%s</pre>\n", $results['results']);
 		} else {
-			$output .= "<h2>Scan still running...</h2><p>This page will reload automatically</p>\n";
+			$output .= "<h2>Scan running...</h2>\n";
+			$output .= "<p>This page will reload itself automatically until the scan completes.</p>\n";
 		}
 	} else {
-		$output .= "<h2>Scan not yet started...</h2><p>This page will reload automatically</p>\n";
+		$output .= "<h2>Scan waiting to start</h2>\n";
+		$output .= "<p>This page will reload itself automatically until the scan completes.</p>\n";
 	}
 } else {
 	$output = "<h3>ScanID Not Found</h3>";
@@ -47,9 +49,9 @@ mysqli_close($conn);
 		<title>PSaaS - Scan Results</title>
 		<meta charset="utf-8">
 <?php
-// if started but not finished yet, refresh again in 30
+// if started but not finished yet, refresh again in 20
 if($finished == 0) {
-	print '<meta http-equiv="refresh" content="30">';
+	print '<meta http-equiv="refresh" content="20">';
 }
 ?>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">

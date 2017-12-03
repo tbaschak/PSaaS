@@ -12,7 +12,7 @@ $channel->queue_declare('nmap', false, true, false, false);
 
 
 $callback = function($msg) {
-	include("../inc/db.inc.php");
+	include_once("../inc/db.inc.php");
 
 	// Create connection
 	$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
@@ -34,8 +34,8 @@ $callback = function($msg) {
 			mysqli_query($conn, $sql);
 
 			// run scan and store results
-			print date('r') . ": running " . $row['scanoptions'] . "\n";
-			$fp=popen($row['scanoptions'], 'r');
+			print date('r') . ": running sudo " . $row['scanoptions'] . "\n";
+			$fp=popen('sudo ' . $row['scanoptions'], 'r');
 			while(!feof($fp)) {
 				$buffer = fgets($fp, 4096);
 				$scanoutput .= $buffer;

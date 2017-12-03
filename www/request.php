@@ -158,7 +158,9 @@ if($error == 1) {
 	$sql = sprintf("INSERT INTO `scans` VALUES (NULL, '%s', '%s', '%s', now(), '0000-00-00 00:00:00', '0000-00-00 00:00:00', '')", $uniqid, $target, "nmap $nmapoptions $target");
 	mysqli_query($conn, $sql);
 
-	printf("<p>Scan submitted.</p><p><a href='/scan/%s'>Wait for this scan...</a></p>\n", $uniqid);
+	printf("<p>Scan submitted.</p><p><a href='/scan/%s'>Look at this scan...</a></p>\n", $uniqid);
+
+	printf("<script language='javascript'>window.location.replace('/scan/%s');</script>", $uniqid);
 
 	$msg = new AMQPMessage($uniqid);
 	$channel->basic_publish($msg, '', 'nmap');
