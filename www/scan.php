@@ -1,6 +1,7 @@
 <?php
 
 include("../inc/db.inc.php");
+include("../inc/common.inc.php");
 
 $scanid = $_GET['scanid'];
 $finished = 0;

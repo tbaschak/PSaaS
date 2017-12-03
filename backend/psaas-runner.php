@@ -4,7 +4,6 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
 
-
 $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
 $channel = $connection->channel();
 
@@ -12,7 +11,7 @@ $channel->queue_declare('nmap', false, true, false, false);
 
 
 $callback = function($msg) {
-	include_once("../inc/db.inc.php");
+	include("../inc/db.inc.php");
 
 	// Create connection
 	$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
